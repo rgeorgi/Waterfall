@@ -1,6 +1,11 @@
 #!/usr/bin/env python3
 import argparse
-import logging
+
+from waterfall.WatermarkingFnFourier import WatermarkingFnFourier
+from waterfall.WatermarkingFnSquare import WatermarkingFnSquare
+from waterfall.WatermarkerBase import Watermarker
+from sentence_transformers import SentenceTransformer
+
 import os
 import torch
 from typing import List, Literal, Optional, Tuple
@@ -8,10 +13,7 @@ from typing import List, Literal, Optional, Tuple
 from transformers import AutoTokenizer, AutoModelForCausalLM
 from tqdm.auto import tqdm
 
-from waterfall.WatermarkingFnFourier import WatermarkingFnFourier
-from waterfall.WatermarkingFnSquare import WatermarkingFnSquare
-from waterfall.WatermarkerBase import Watermarker
-from sentence_transformers import SentenceTransformer
+
 
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
@@ -209,6 +211,8 @@ if __name__ == "__main__":
     parser.add_argument('--k_p', default=1, type=int,
         help="k_p: Perturbation key")
     parser.add_argument('--model', default='meta-llama/Llama-3.1-8B-Instruct', type=str,
+
+
         help="watermarking model")
     parser.add_argument('--sts_model', default='sentence-transformers/all-mpnet-base-v2', type=str,
         help="STS model")
